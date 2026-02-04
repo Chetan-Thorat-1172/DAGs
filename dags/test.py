@@ -30,7 +30,7 @@ with DAG(
     )
 
     notify = SnowflakeOperator(
-        task_id="load",
+        task_id="notify",
         sql="CALL PI_FLOW.RAW.LOAD_DATA();",  
         connection_id="snowflake_default" 
     )
