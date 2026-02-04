@@ -26,7 +26,7 @@ with DAG(
     load = SnowflakeOperator(
         task_id="load",
         sql="CALL PI_FLOW.RAW.LOAD_DATA();",  
-        connection_id="snowflake_default"
+        connection_id="snowflake_default" 
     )
 
     # execution order
