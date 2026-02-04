@@ -29,5 +29,11 @@ with DAG(
         connection_id="snowflake_default" 
     )
 
+    notify = SnowflakeOperator(
+        task_id="load",
+        sql="CALL PI_FLOW.RAW.LOAD_DATA();",  
+        connection_id="snowflake_default" 
+    )
+
     # execution order
-    extract >> transform >> load  
+    extract >> transform >> [ load , notify ]
