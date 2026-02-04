@@ -30,4 +30,4 @@ with DAG(
     )
 
     # execution order
-    extract >> transform >> load
+    extract >> transform >> load 
