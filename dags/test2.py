@@ -109,4 +109,4 @@ with DAG(
 
     [validate_orders, load_orders] >> aggregate_metrics
 
-    aggregate_metrics >> publish_report
+    aggregate_metrics >> publish_report  
