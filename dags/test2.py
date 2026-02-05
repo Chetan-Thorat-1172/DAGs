@@ -18,13 +18,6 @@ with DAG(
         connection_id="snowflake_default" 
     )
 
-    # Task e (start path 2)
-    e = SnowflakeOperator(
-        task_id="e",
-        sql="SELECT 'task e executed';",
-        connection_id="snowflake_default"
-    )
-
     # Common task b (join point)
     b = SnowflakeOperator(
         task_id="b",
@@ -50,5 +43,5 @@ with DAG(
     # Dependency graph
     # ------------------
 
-    a >> b >> c
-    e >> b >> f
+    a >> b >> [c,f]
+
