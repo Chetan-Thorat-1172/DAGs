@@ -6,7 +6,7 @@ from datetime import datetime
 
 with DAG(
     dag_id="two_paths_single_dag",
-    schedule_interval="5 18 * * *",
+    schedule_interval="@daily",
     start_date=datetime(2026, 2, 5),
     catchup=False
 ) as dag:
