@@ -14,7 +14,7 @@ with DAG(
     # Task a (start path 1)
     a = SnowflakeOperator(
         task_id="a",
-        sql="SELECT 'task a executed';",
+        sql="SELEC 'task a executed';",
         connection_id="snowflake_default" 
     )
 
