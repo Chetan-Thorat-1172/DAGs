@@ -43,5 +43,5 @@ with DAG(
     # Dependency graph
     # ------------------
 
-    a >> b >> [c,f]
+    a >> b >> [c,f] 
 
