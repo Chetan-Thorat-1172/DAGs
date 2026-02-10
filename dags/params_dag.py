@@ -37,7 +37,7 @@ with DAG(
         "customer_id": Param(
             type="integer",
             default=0,
-            description="Customer identifier"
+            description="Customer identifier" 
         ),
         "full_load": Param(
             type="boolean",
