@@ -63,4 +63,4 @@ with DAG(
     )
 
     # Dependencies
-    print_parameters >> process_data >> finalize
+    print_parameters >> process_data >> finalize 
