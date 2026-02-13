@@ -1,5 +1,4 @@
-from dag_parser.dynamic.dag_context import DAG
-from dag_parser.dynamic.operators import PythonOperator, BranchPythonOperator
+from dag_parser.dynamic.dag_context import DAG, PythonOperator, BranchPythonOperator
 from datetime import datetime
 
 
