@@ -43,7 +43,7 @@ with DAG(
     extract_full = PythonOperator(
         task_id="extract_full",
         python_callable=lambda **_: task_logic("extract_full"),
-    )
+    ) 
 
     validate_full = PythonOperator(
         task_id="validate_full",
