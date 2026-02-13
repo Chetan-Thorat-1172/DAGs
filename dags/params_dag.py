@@ -1,6 +1,6 @@
 from dag_parser.dynamic.dag_context import DAG
 from dag_parser.dynamic.operators import PythonOperator
-from dag_parser.dynamic.params import Param
+from dag_parser.dynamic.params import Param 
 from datetime import datetime
 
 
