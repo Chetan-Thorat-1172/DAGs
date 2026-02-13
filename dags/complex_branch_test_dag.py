@@ -41,7 +41,7 @@ with DAG(
         "full_load": Param(
             type="boolean",
             default=False,
-            description="If true → run full load branch. Else incremental."
+            description="If true then run full load branch. Else incremental."
         )
     },
 ) as dag:
