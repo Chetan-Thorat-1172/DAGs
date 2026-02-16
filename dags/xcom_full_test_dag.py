@@ -9,7 +9,7 @@ from datetime import datetime
 # - Returns dictionary (auto XCom push expected)
 # ----------------------------------------------------
 def extract_data(**context):
-    print(" Extracting data...") 
+    print(" Extracting data...")
 
     data = {
         "rows": 120,
