@@ -9,7 +9,7 @@ from datetime import datetime
 # - Returns dictionary (auto XCom push expected)
 # ----------------------------------------------------
 def extract_data(**context):
-    print("📥 Extracting data...")
+    print(" Extracting data...")
 
     data = {
         "rows": 120,
@@ -31,7 +31,7 @@ def extract_data(**context):
 def transform_data(**context):
     ti = context["ti"]
 
-    print("🔄 Transforming data...")
+    print(" Transforming data...")
 
     extracted = ti.xcom_pull(task_ids="extract_task")
 
@@ -59,7 +59,7 @@ def transform_data(**context):
 def validate_data(**context):
     ti = context["ti"]
 
-    print("🔍 Validating data...")
+    print(" Validating data...")
 
     transform_meta = ti.xcom_pull(
         task_ids="transform_task",
@@ -83,7 +83,7 @@ def finalize_pipeline(**context):
     ti = context["ti"]
     dag_run = context["dag_run"]
 
-    print("🏁 Finalizing pipeline...")
+    print(" Finalizing pipeline...")
 
     # Pull default return_value
     extract_result = ti.xcom_pull(task_ids="extract_task")
