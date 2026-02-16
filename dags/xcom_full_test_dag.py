@@ -19,7 +19,7 @@ def extract_data(**context):
 
     print(f"Extracted: {data}")
 
-    # Return value should automatically push to XCom (key="return_value")
+    # Auto XCom push expected (key="return_value")
     return data
 
 
@@ -45,9 +45,10 @@ def transform_data(**context):
 
     print(f"Transformed result: {transformed}")
 
-    # Explicit push
+    # Explicit push with custom key
     ti.xcom_push(key="transform_metadata", value=transformed)
 
+    # Also auto-push via return_value
     return transformed
 
 
@@ -68,7 +69,7 @@ def validate_data(**context):
     print(f"Pulled transform_metadata: {transform_meta}")
 
     if transform_meta["rows"] > 0:
-        print("✅ Validation successful")
+        print(" Validation successful")
         return {"validated": True}
     else:
         raise ValueError("No rows found")
@@ -80,9 +81,11 @@ def validate_data(**context):
 # ----------------------------------------------------
 def finalize_pipeline(**context):
     ti = context["ti"]
+    dag_run = context["dag_run"]
 
     print("🏁 Finalizing pipeline...")
 
+    # Pull default return_value
     extract_result = ti.xcom_pull(task_ids="extract_task")
     transform_result = ti.xcom_pull(task_ids="transform_task")
     validate_result = ti.xcom_pull(task_ids="validate_task")
@@ -92,6 +95,9 @@ def finalize_pipeline(**context):
     print(f"Transform: {transform_result}")
     print(f"Validate : {validate_result}")
     print("-------------------")
+
+    print("DAG Run Params:")
+    print(dag_run.conf)
 
     return "Pipeline completed successfully!"
 
@@ -126,3 +132,12 @@ with DAG(
     validate_task = PythonOperator(
         task_id="validate_task",
         python_callable=validate_data,
+    )
+
+    finalize_task = PythonOperator(
+        task_id="finalize_task",
+        python_callable=finalize_pipeline,
+    )
+
+    # DAG Dependencies
+    extract_task >> transform_task >> validate_task >> finalize_task
