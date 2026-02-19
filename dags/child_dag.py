@@ -3,7 +3,7 @@ Child DAG — Triggered by parent_trigger_dag via TriggerDagRunOperator.
 
 This DAG:
 1. Reads the conf passed from the parent DAG
-2. Processes data based on the conf parameters
+2. Processes data based on the conf parameters  
 3. Outputs a summary
 
 It is designed to be triggered programmatically (schedule_interval=None)
