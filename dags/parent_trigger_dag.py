@@ -15,7 +15,7 @@ The parent DAG does NOT call the child DAG's code directly. Instead:
     - The worker INSERTs a new DAG_RUN row for child_dag
     - The scheduler picks it up and creates task instances
     - The child DAG executes normally
-    - The parent polls DAG_RUN.STATE until the child completes
+    - The parent polls DAG_RUN.STATE until the child completes..
 """
 
 from datetime import datetime
