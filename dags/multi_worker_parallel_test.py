@@ -22,7 +22,6 @@ def heavy_task(task_number: int, **context):
     print(f"Task ID: {ti.task_id}")
     print("=" * 60)
 
-    # Simulate workload
     time.sleep(10)
 
     print(f"Task {task_number} finished")
@@ -33,18 +32,31 @@ def heavy_task(task_number: int, **context):
 # DAG Definition
 # -----------------------------------------------------
 with DAG(
-    dag_id="multi_worker_parallel_test",
+    dag_id="multi_worker_parallel_test_explicit",
     schedule_interval=None,
     start_date=datetime(2026, 1, 1),
     catchup=False,
-    description="DAG to test multi-worker distribution",
+    description="DAG to test multi-worker task distribution",
 ) as dag:
 
-    # Create 30 parallel tasks
-    for i in range(1, 31):
-        PythonOperator(
-            task_id=f"parallel_task_{i}",
-            python_callable=heavy_task,
-            op_kwargs={"task_number": i},
-            trigger_rule="always",   # Critical for parallel scheduling
-        )
+    t1 = PythonOperator(task_id="parallel_task_1", python_callable=heavy_task, op_kwargs={"task_number": 1}, trigger_rule="always")
+    t2 = PythonOperator(task_id="parallel_task_2", python_callable=heavy_task, op_kwargs={"task_number": 2}, trigger_rule="always")
+    t3 = PythonOperator(task_id="parallel_task_3", python_callable=heavy_task, op_kwargs={"task_number": 3}, trigger_rule="always")
+    t4 = PythonOperator(task_id="parallel_task_4", python_callable=heavy_task, op_kwargs={"task_number": 4}, trigger_rule="always")
+    t5 = PythonOperator(task_id="parallel_task_5", python_callable=heavy_task, op_kwargs={"task_number": 5}, trigger_rule="always")
+    t6 = PythonOperator(task_id="parallel_task_6", python_callable=heavy_task, op_kwargs={"task_number": 6}, trigger_rule="always")
+    t7 = PythonOperator(task_id="parallel_task_7", python_callable=heavy_task, op_kwargs={"task_number": 7}, trigger_rule="always")
+    t8 = PythonOperator(task_id="parallel_task_8", python_callable=heavy_task, op_kwargs={"task_number": 8}, trigger_rule="always")
+    t9 = PythonOperator(task_id="parallel_task_9", python_callable=heavy_task, op_kwargs={"task_number": 9}, trigger_rule="always")
+    t10 = PythonOperator(task_id="parallel_task_10", python_callable=heavy_task, op_kwargs={"task_number": 10}, trigger_rule="always")
+
+    t11 = PythonOperator(task_id="parallel_task_11", python_callable=heavy_task, op_kwargs={"task_number": 11}, trigger_rule="always")
+    t12 = PythonOperator(task_id="parallel_task_12", python_callable=heavy_task, op_kwargs={"task_number": 12}, trigger_rule="always")
+    t13 = PythonOperator(task_id="parallel_task_13", python_callable=heavy_task, op_kwargs={"task_number": 13}, trigger_rule="always")
+    t14 = PythonOperator(task_id="parallel_task_14", python_callable=heavy_task, op_kwargs={"task_number": 14}, trigger_rule="always")
+    t15 = PythonOperator(task_id="parallel_task_15", python_callable=heavy_task, op_kwargs={"task_number": 15}, trigger_rule="always")
+    t16 = PythonOperator(task_id="parallel_task_16", python_callable=heavy_task, op_kwargs={"task_number": 16}, trigger_rule="always")
+    t17 = PythonOperator(task_id="parallel_task_17", python_callable=heavy_task, op_kwargs={"task_number": 17}, trigger_rule="always")
+    t18 = PythonOperator(task_id="parallel_task_18", python_callable=heavy_task, op_kwargs={"task_number": 18}, trigger_rule="always")
+    t19 = PythonOperator(task_id="parallel_task_19", python_callable=heavy_task, op_kwargs={"task_number": 19}, trigger_rule="always")
+    t20 = PythonOperator(task_id="parallel_task_20", python_callable=heavy_task, op_kwargs={"task_number": 20}, trigger_rule="always")
