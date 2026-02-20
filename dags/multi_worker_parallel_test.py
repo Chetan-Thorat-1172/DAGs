@@ -9,14 +9,13 @@ import os
 # -----------------------------------------------------
 # Generic Task Callable
 # -----------------------------------------------------
-def heavy_task(task_number: int, **context):
+def heavy_task(**context):
     ti = context["ti"]
 
     hostname = socket.gethostname()
     pid = os.getpid()
 
     print("=" * 60)
-    print(f"Task {task_number} started")
     print(f"Executed on host: {hostname}")
     print(f"Process PID: {pid}")
     print(f"Task ID: {ti.task_id}")
