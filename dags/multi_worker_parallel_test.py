@@ -23,9 +23,6 @@ def heavy_task(**context):
 
     time.sleep(10)
 
-    print(f"Task {task_number} finished")
-    print("=" * 60)
-
 
 # -----------------------------------------------------
 # DAG Definition
