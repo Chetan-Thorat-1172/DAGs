@@ -9,9 +9,9 @@ def simple_task(name):
     print(f"Executing {name}")
 
 
-# -----------------------------
+# ---------------------------
 # Flaky task (fails first 2 times)
-# -----------------------------
+# ---------------------------
 def unstable_task(**context):
     ti = context["task_instance"]
 
