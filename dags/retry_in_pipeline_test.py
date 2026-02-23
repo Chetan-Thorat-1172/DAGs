@@ -54,7 +54,7 @@ with DAG(
         task_id="unstable_transform",
         python_callable=unstable_task,
         retries=2,
-        retry_delay_seconds=10,
+        retry_delay_seconds=80,
     )
 
     # -----------------------------
