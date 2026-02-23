@@ -2,9 +2,9 @@ from dag_parser.dynamic.dag_context import DAG, PythonOperator
 from datetime import datetime
 
 
-# -----------------------------
+# ---------------------------
 # Stable tasks
-# -----------------------------
+# ---------------------------
 def simple_task(name):
     print(f"Executing {name}")
 
