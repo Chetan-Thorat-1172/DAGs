@@ -13,7 +13,7 @@ def simple_task(name):
 # Flaky task (fails first 2 times)
 # ---------------------------
 def unstable_task(**context):
-    ti = context["task_instance"]
+    ti = context["ti"]
 
     print(f"[unstable_task] TRY_NUMBER: {ti.try_number}")
 
