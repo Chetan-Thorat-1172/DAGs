@@ -20,6 +20,7 @@ with DAG(
     dag_id="default_args_retry_test_1",
     default_args=default_args,
     schedule_interval=None,
+    start_date = datetime(2026,2,24)
     catchup=False,
 ) as dag:
 
