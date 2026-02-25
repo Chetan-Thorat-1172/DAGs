@@ -20,17 +20,17 @@ with DAG(
 
     task_1 = PythonOperator(
         task_id="task_1",
-        python_callable=lambda **_: always_fail("task_1"),
+        python_callable=always_fail("task_1"),
     )
 
     task_2 = PythonOperator(
         task_id="task_2",
-        python_callable=lambda **_: always_fail("task_2"),
+        python_callable=always_fail("task_2"),
     )
 
     task_3 = PythonOperator(
         task_id="task_3",
-        python_callable=lambda **_: always_fail("task_3"),
+        python_callable=always_fail("task_3"),
     )
 
     task_1 >> task_2 >> task_3
