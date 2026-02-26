@@ -7,7 +7,7 @@ This DAG demonstrates all major Pi-Flow capabilities:
 3. Task Retries & Retry Logic
 4. Default Args Inheritance
 5. XCom Inter-task Communication
-6. Task Trigger Rules
+6. Task Trigger Rulesss
 7. Error Handling & Flaky Task Recovery
 8. Parallel Task Execution (fan-out/fan-in)
 9. Multi-worker Distribution
