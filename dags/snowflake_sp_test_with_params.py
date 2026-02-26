@@ -20,6 +20,7 @@ with DAG(
     schedule_interval=None,
     start_date=datetime(2026, 2, 1),
     catchup=False,
+    
 
     #  Runtime parameters (shown in UI)
     params={
@@ -53,6 +54,7 @@ with DAG(
             %(restartind)s
         );
         """,
+        connection_id="snowflake_default",
     )
 
     # -----------------------------
