@@ -53,7 +53,6 @@ with DAG(
             %(restartind)s
         );
         """,
-        connection_id="snowflake_default",
     )
 
     # -----------------------------
