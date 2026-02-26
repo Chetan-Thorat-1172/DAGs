@@ -6,7 +6,7 @@ import os
 import time
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# SECTION 1: PARAMETER & CONTEXT READING
+# SECTION 1: PARAMETER & CONTEXT READINGs
 # ═══════════════════════════════════════════════════════════════════════════════
 
 def read_and_validate_params(**context):
