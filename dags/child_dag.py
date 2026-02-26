@@ -9,7 +9,7 @@ This DAG:
 It is designed to be triggered programmatically (schedule_interval=None)
 and demonstrates cross-DAG communication via dag_run.conf.
 """
-
+  
 from datetime import datetime
 from dag_parser.dynamic.operators import PythonOperator
 from dag_parser.dynamic.dag_context import DAG
