@@ -7,7 +7,7 @@ This DAG demonstrates all major Pi-Flow capabilities:
 3. Task Retries & Retry Logic
 4. Default Args Inheritance
 5. XCom Inter-task Communication
-6. Task Trigger Rulesss
+6. Task Trigger Rules
 7. Error Handling & Flaky Task Recovery
 8. Parallel Task Execution (fan-out/fan-in)
 9. Multi-worker Distribution
@@ -426,9 +426,14 @@ with DAG(
     extract_full_data_task >> transform_full_data_task
     extract_incremental_data_task >> transform_incremental_data_task
     
-    [transform_full_data_task, transform_incremental_data_task] >> parallel_batch_tasks
+    # Fan-out: Both transform tasks to all parallel batch tasks
+    for batch_task in parallel_batch_tasks:
+        transform_full_data_task >> batch_task
+        transform_incremental_data_task >> batch_task
     
-    parallel_batch_tasks >> flaky_quality_check_task
+    # All parallel tasks to quality check
+    for batch_task in parallel_batch_tasks:
+        batch_task >> flaky_quality_check_task
     
     flaky_quality_check_task >> join_branches_task
     
