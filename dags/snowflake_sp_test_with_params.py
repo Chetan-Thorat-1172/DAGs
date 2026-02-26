@@ -3,7 +3,7 @@ from dag_parser.dynamic.operators import SnowflakeOperator, PythonOperator
 from dag_parser.dynamic.params import Param
 from datetime import datetime
 
-
+  
 # -----------------------------
 # Simple Logging Function
 # -----------------------------
