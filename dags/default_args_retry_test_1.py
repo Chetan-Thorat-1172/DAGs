@@ -20,8 +20,8 @@ default_args = {
 with DAG(
     dag_id="default_args_retry_test_1",
     default_args=default_args,
-    schedule_interval=None,
-    start_date = datetime(2026,2,24),
+    schedule_interval=@hourly,
+    start_date = datetime(2026,2,27),
     catchup=False,
 ) as dag:
 
