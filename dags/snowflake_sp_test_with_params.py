@@ -21,7 +21,7 @@ with DAG(
     start_date=datetime(2026, 2, 1),
     catchup=False,
 
-    # 🔹 Runtime parameters (shown in UI)
+    #  Runtime parameters (shown in UI)
     params={
         "processDate": Param(
             type="string",
