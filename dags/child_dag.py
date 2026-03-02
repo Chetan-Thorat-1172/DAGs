@@ -7,7 +7,7 @@ This DAG:
 3. Outputs a summarydod
 
 It is designed to be triggered programmatically (schedule_interval=None)
-and demonstrates cross-DAG communication via dag_run.conf.
+and demonstrates cross-DAG communication via dag_run.conf..
 """
   
 from datetime import datetime
