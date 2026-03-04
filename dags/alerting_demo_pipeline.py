@@ -30,7 +30,7 @@ from dag_parser.dynamic.dag_context import DAG, PythonOperator, EmailOperator , 
 # ─────────────────────────────────────────────────────────
 
 failure_notifier = SmtpNotifier(
-    to=["thoratc146@gmail.com"],
+    to=["Chetan.Thorat@Pibythree.com"],
     subject="❌ Task Failed: {{ dag_id }}.{{ task_id }}",
     html_content="""
     <h3>Task Failure</h3>
@@ -43,25 +43,25 @@ failure_notifier = SmtpNotifier(
 )
 
 retry_notifier = SmtpNotifier(
-    to=["thoratc146@gmail.com"],
+    to=["Chetan.Thorat@Pibythree.com"],
     subject="🔄 Retry Triggered: {{ dag_id }}.{{ task_id }} (Attempt {{ try_number }})",
     html_content="<p>Task is retrying.</p>",
 )
 
 success_notifier = SmtpNotifier(
-    to=["thoratc146@gmail.com"],
+    to=["Chetan.Thorat@Pibythree.com"],
     subject="✅ Task Success: {{ dag_id }}.{{ task_id }}",
     html_content="<p>Task completed successfully.</p>",
 )
 
 dag_success_notifier = SmtpNotifier(
-    to=["thoratc146@gmail.com"],
+    to=["Chetan.Thorat@Pibythree.com"],
     subject="🎉 DAG Completed: {{ dag_id }}",
     html_content="<p>DAG {{ dag_id }} finished successfully.</p>",
 )
 
 dag_failure_notifier = SmtpNotifier(
-    to=["thoratc146@gmail.com"],
+    to=["Chetan.Thorat@Pibythree.com"],
     subject="🚨 DAG Failed: {{ dag_id }}",
     html_content="<p>DAG {{ dag_id }} has failed.</p>",
 )
@@ -138,7 +138,7 @@ with DAG(
 
     send_report = EmailOperator(
         task_id="send_summary_email",
-        to=["thoratc146@gmail.com"],
+        to=["Chetan.Thorat@Pibythree.com"],
         subject="📊 DAG {{ dag_id }} Report",
         html_content="""
         <h2>DAG Execution Summary</h2>
