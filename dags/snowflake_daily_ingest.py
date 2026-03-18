@@ -3,7 +3,7 @@ from dag_parser.dynamic.dag_context import (
     BranchPythonOperator,
     PythonOperator,
 )
-from dag_parser.dynamic.operators import SnowflakeOperator
+from dag_parser.dynamic.dag_context import SnowflakeOperator
 from dag_parser.dynamic.params import Param
 from datetime import datetime
 
