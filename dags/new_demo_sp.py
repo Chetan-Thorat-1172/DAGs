@@ -1,5 +1,5 @@
 from dag_parser.dynamic.dag_context import DAG
-from dag_parser.dynamic.operators import SnowflakeOperator
+from dag_parser.dynamic.dag_context import SnowflakeOperator
 from datetime import datetime
 
 with DAG(
