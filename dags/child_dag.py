@@ -12,7 +12,7 @@ and demonstrates cross-DAG communication via dag_run.conf..
 #commentadss
 #making changes
 from datetime import datetime
-from dag_parser.dynamic.operators import PythonOperator
+from dag_parser.dynamic.dag_context import PythonOperator
 from dag_parser.dynamic.dag_context import DAG
 
 
