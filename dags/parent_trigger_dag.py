@@ -19,7 +19,7 @@ The parent DAG does NOT call the child DAG's code directly. Instead:
 """
 
 from datetime import datetime
-from dag_parser.dynamic.operators import PythonOperator, TriggerDagRunOperator
+from dag_parser.dynamic.dag_context import PythonOperator, TriggerDagRunOperator
 from dag_parser.dynamic.dag_context import DAG
 
 
