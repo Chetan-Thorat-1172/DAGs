@@ -5,7 +5,7 @@ from datetime import datetime
 with DAG(
     dag_id="snowflake_etl_dag",
     description="ETL pipeline: Extract → Transform → Load",
-    schedule_interval="@daily",
+    schedule_interval=None,
     start_date=datetime(2026, 3, 30),
     catchup=False,
     tags=["snowflake", "etl"],
