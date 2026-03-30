@@ -29,7 +29,7 @@ def heavy_task(**context):
 # -----------------------------------------------------
 with DAG(
     dag_id="multi_worker_parallel_test",
-    schedule_interval="@daily",
+    schedule_interval=None,
     start_date=datetime(2026, 3, 30),
     catchup=False,
     description="DAG to test multi-worker task distribution",
