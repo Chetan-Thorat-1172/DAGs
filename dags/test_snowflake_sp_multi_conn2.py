@@ -8,7 +8,7 @@ from datetime import datetime
 # Default connection (DAG level)
 # -----------------------------
 default_args = {
-    "snowflake_conn_id": "Dipak_Snowflake_Conn"
+    "snowflake_conn_id": "harsh_conn"
 }
 
 
