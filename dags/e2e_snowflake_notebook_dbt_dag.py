@@ -7,7 +7,7 @@ This DAG validates an end-to-end analytics pipeline using:
 3. Direct Snowflake DBT project execution via EXECUTE DBT PROJECT
 
 Reference DDL file:
-- dags-repo/dags/regression_suite/sql/reg_e2e_notebook_dbt_ddl.sql
+- dags-repo/dags/regression_suite/sql/reg_e2e_notebook_dbt_ddl.sql   
 """
 
 from datetime import datetime
