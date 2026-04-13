@@ -1,58 +1,55 @@
 from dag_parser.dynamic.dag_context import DAG
-from dag_parser.dynamic.dag_context import PythonOperator
+from dag_parser.dynamic.operators import SnowflakeOperator
+from dag_parser.dynamic.params import Param
 from datetime import datetime
-import time
-import socket
-import os
-  
 
-# -----------s-------------------------------------------
-# Generic Task Callable
-# -----------------------------------------------------
-def heavy_task(**context):
-    ti = context["ti"]
+default_args = {
+    "snowflake_conn_id": "harsh_conn"
+}
 
-    hostname = socket.gethostname()
-    pid = os.getpid()
-
-    print("=" * 60)
-    print(f"Executed on host: {hostname}")
-    print(f"Process PID: {pid}")
-    print(f"Task ID: {ti.task_id}")
-    print("=" * 60)
-
-    time.sleep(10)
-
-
-# -----------------------------------------------------
-# DAG Definition
-# -----------------------------------------------------
 with DAG(
-    dag_id="multi_worker_parallel_test",
+    dag_id="test_snowflake_simple",
     schedule_interval=None,
-    start_date=datetime(2026, 3, 30),
+    start_date=datetime(2026, 3, 10),
     catchup=False,
-    description="DAG to test multi-worker task distribution",
+    default_args=default_args,
+    params={
+        "run_date": Param(type="string", default="2026-03-01"),
+        "batch_id": Param(type="string", default="BATCH_001"),
+        "env": Param(type="string", default="DEV"),
+    },
 ) as dag:
 
-    t1 = PythonOperator(task_id="parallel_task_1", python_callable=heavy_task, trigger_rule="always")
-    t2 = PythonOperator(task_id="parallel_task_2", python_callable=heavy_task, trigger_rule="always")
-    t3 = PythonOperator(task_id="parallel_task_3", python_callable=heavy_task, trigger_rule="always")
-    t4 = PythonOperator(task_id="parallel_task_4", python_callable=heavy_task, trigger_rule="always")
-    t5 = PythonOperator(task_id="parallel_task_5", python_callable=heavy_task, trigger_rule="always")
-    t6 = PythonOperator(task_id="parallel_task_6", python_callable=heavy_task, trigger_rule="always")
-    t7 = PythonOperator(task_id="parallel_task_7", python_callable=heavy_task, trigger_rule="always")
-    t8 = PythonOperator(task_id="parallel_task_8", python_callable=heavy_task, trigger_rule="always")
-    t9 = PythonOperator(task_id="parallel_task_9", python_callable=heavy_task, trigger_rule="always")
-    t10 = PythonOperator(task_id="parallel_task_10", python_callable=heavy_task, trigger_rule="always")
+    # Task 1: Create table
+    task_create = SnowflakeOperator(
+        task_id="create_run_log_table",
+        sql="""
+        CREATE TABLE IF NOT EXISTS PI_FLOW.APP.RUN_LOG (
+            log_id     NUMBER AUTOINCREMENT PRIMARY KEY,
+            run_date   DATE,
+            batch_id   VARCHAR,
+            env        VARCHAR,
+            created_at TIMESTAMP_NTZ DEFAULT CURRENT_TIMESTAMP()
+        );
+        """
+    )
 
-    t11 = PythonOperator(task_id="parallel_task_11", python_callable=heavy_task, trigger_rule="always")
-    t12 = PythonOperator(task_id="parallel_task_12", python_callable=heavy_task, trigger_rule="always")
-    t13 = PythonOperator(task_id="parallel_task_13", python_callable=heavy_task, trigger_rule="always")
-    t14 = PythonOperator(task_id="parallel_task_14", python_callable=heavy_task, trigger_rule="always")
-    t15 = PythonOperator(task_id="parallel_task_15", python_callable=heavy_task, trigger_rule="always")
-    t16 = PythonOperator(task_id="parallel_task_16", python_callable=heavy_task, trigger_rule="always")
-    t17 = PythonOperator(task_id="parallel_task_17", python_callable=heavy_task, trigger_rule="always")
-    t18 = PythonOperator(task_id="parallel_task_18", python_callable=heavy_task, trigger_rule="always")
-    t19 = PythonOperator(task_id="parallel_task_19", python_callable=heavy_task, trigger_rule="always")
-    t20 = PythonOperator(task_id="parallel_task_20", python_callable=heavy_task, trigger_rule="always")
+    # Task 2: Insert a row
+    task_insert = SnowflakeOperator(
+        task_id="insert_run_log",
+        sql="""
+        INSERT INTO PI_FLOW.APP.RUN_LOG (run_date, batch_id, env)
+        VALUES (%(run_date)s, %(batch_id)s, %(env)s);
+        """
+    )
+
+    # Task 3: Select to verify
+    task_select = SnowflakeOperator(
+        task_id="select_run_log",
+        sql="""
+        SELECT * FROM PI_FLOW.APP.RUN_LOG
+        WHERE batch_id = %(batch_id)s;
+        """
+    )
+
+    task_create >> task_insert >> task_select
