@@ -1,55 +1,32 @@
 from dag_parser.dynamic.dag_context import DAG
 from dag_parser.dynamic.operators import SnowflakeOperator
-from dag_parser.dynamic.params import Param
 from datetime import datetime
-#comment
+
 default_args = {
     "snowflake_conn_id": "harsh_conn"
 }
 
 with DAG(
-    dag_id="test_snowflake_simple",
+    dag_id="test_snowflake_hello",
     schedule_interval=None,
     start_date=datetime(2026, 3, 10),
     catchup=False,
     default_args=default_args,
-    params={
-        "run_date": Param(type="string", default="2026-03-01"),
-        "batch_id": Param(type="string", default="BATCH_001"),
-        "env": Param(type="string", default="DEV"),
-    },
 ) as dag:
 
-    # Task 1: Create table
-    task_create = SnowflakeOperator(
-        task_id="create_run_log_table",
-        sql="""
-        CREATE TABLE IF NOT EXISTS PI_FLOW.APP.RUN_LOG (
-            log_id     NUMBER AUTOINCREMENT PRIMARY KEY,
-            run_date   DATE,
-            batch_id   VARCHAR,
-            env        VARCHAR,
-            created_at TIMESTAMP_NTZ DEFAULT CURRENT_TIMESTAMP()
-        );
-        """
+    task_1 = SnowflakeOperator(
+        task_id="say_hello",
+        sql="SELECT 'Hello from task 1' AS message;"
     )
 
-    # Task 2: Insert a row
-    task_insert = SnowflakeOperator(
-        task_id="insert_run_log",
-        sql="""
-        INSERT INTO PI_FLOW.APP.RUN_LOG (run_date, batch_id, env)
-        VALUES (%(run_date)s, %(batch_id)s, %(env)s);
-        """
+    task_2 = SnowflakeOperator(
+        task_id="say_world",
+        sql="SELECT 'Hello from task 2' AS message;"
     )
 
-    # Task 3: Select to verify
-    task_select = SnowflakeOperator(
-        task_id="select_run_log",
-        sql="""
-        SELECT * FROM PI_FLOW.APP.RUN_LOG
-        WHERE batch_id = %(batch_id)s;
-        """
+    task_3 = SnowflakeOperator(
+        task_id="say_done",
+        sql="SELECT 'All tasks done!' AS message;"
     )
 
-    task_create >> task_insert >> task_select
+    task_1 >> task_2 >> task_3
