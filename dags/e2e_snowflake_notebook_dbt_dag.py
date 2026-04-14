@@ -82,7 +82,7 @@ with DAG(
 
     t06_notebook = SnowflakeOperator(
         task_id='run_snowflake_notebook',
-        sql='EXECUTE NOTEBOOK DAG_TESTING.PI_FLOW_QA.NB_ORDERS_ANALYTICS();',
+        sql='EXECUTE NOTEBOOK PROJECT DAG_TESTING.PI_FLOW_QA.NB_ORDERS_ANALYTICS;',
     )
 
     t07_dbt_seed = SnowflakeOperator(
