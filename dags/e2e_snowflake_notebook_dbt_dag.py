@@ -87,17 +87,17 @@ with DAG(
 
     t07_dbt_seed = SnowflakeOperator(
         task_id='run_dbt_seed',
-        sql="EXECUTE DBT PROJECT PI_FLOW_QA.DBT_PROJECTS.PI_FLOW_DBT_DEMO ARGS='seed' TARGET='dev';",
+        sql="EXECUTE DBT PROJECT PI_FLOW_QA.DBT_PROJECTS.PI_FLOW_DBT_DEMO ARGS = 'seed --target dev'",
     )
 
     t08_dbt_staging = SnowflakeOperator(
         task_id='run_dbt_staging_models',
-        sql="EXECUTE DBT PROJECT PI_FLOW_QA.DBT_PROJECTS.PI_FLOW_DBT_DEMO ARGS='run --select stg_orders stg_customers' TARGET='dev';",
+        sql="EXECUTE DBT PROJECT PI_FLOW_QA.DBT_PROJECTS.PI_FLOW_DBT_DEMO ARGS = 'run --select stg_orders stg_customers --target dev';",
     )
 
     t09_dbt_marts = SnowflakeOperator(
         task_id='run_dbt_marts',
-        sql="EXECUTE DBT PROJECT PI_FLOW_QA.DBT_PROJECTS.PI_FLOW_DBT_DEMO ARGS='run --select fct_orders mart_revenue' TARGET='dev';",
+        sql="EXECUTE DBT PROJECT PI_FLOW_QA.DBT_PROJECTS.PI_FLOW_DBT_DEMO ARGS = 'run --select fct_orders mart_revenue --target dev';",
     )
 
     t10_dq_assertions = SnowflakeOperator(
