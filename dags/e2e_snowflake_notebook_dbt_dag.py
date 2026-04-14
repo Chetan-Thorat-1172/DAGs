@@ -1,5 +1,5 @@
 """
-Regression DAG: Snowflake SP + Notebook + DBT E2E
+Regression DAG: Snowflake SP + Notebook + DBT E2E 
 
 This DAG validates an end-to-end analytics pipeline using:
 1. Multiple Snowflake stored procedures
