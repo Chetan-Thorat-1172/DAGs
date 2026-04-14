@@ -52,6 +52,7 @@ with DAG(
     default_args={
         'retries': 1,
         'retry_delay_seconds': 30,
+        "snowflake_conn_id": "chetan_conn"
     },
 ) as dag:
     t01_bootstrap = PythonOperator(
