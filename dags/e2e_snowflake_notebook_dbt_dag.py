@@ -121,15 +121,7 @@ with DAG(
         python_callable=capture_post_metrics,
     )
 
-    t13_notify = EmailOperator(
-        task_id='notify_completion',
-        to=['qa-alerts@pibythree.com'],
-        subject='E2E DAG complete {{ dag_id }} {{ run_id }}',
-        html_content='<h3>E2E flow completed</h3><p>state={{ state }}</p>',
-        trigger_rule='all_done',
-    )
-
-    t14_finalize = PythonOperator(
+    t13_finalize = PythonOperator(
         task_id='finalize_pipeline',
         python_callable=finalize_pipeline,
         trigger_rule='all_done',
@@ -137,4 +129,4 @@ with DAG(
 
     t01_bootstrap >> t02_prepare_objects >> t03_ingest_raw >> t04_cleanse >> t05_enrich
     t05_enrich >> t06_notebook >> t07_dbt_seed >> t08_dbt_staging >> t09_dbt_marts
-    t09_dbt_marts >> t10_dq_assertions >> t11_publish >> t12_metrics >> t13_notify >> t14_finalize
+    t09_dbt_marts >> t10_dq_assertions >> t11_publish >> t12_metrics >> t13_finalize
