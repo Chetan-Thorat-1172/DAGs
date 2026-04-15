@@ -50,7 +50,7 @@ with DAG(
         'dbt_target': Param(type='string', default='dev', description='DBT target profile'),
     },
     default_args={
-        'snowflake_conn_id': 'snowflake_default',
+        'snowflake_conn_id': 'chetan_conn',
         'retries': 1,
         'retry_delay_seconds': 30,
     },
@@ -80,17 +80,16 @@ with DAG(
         sql='CALL DAG_TESTING.PI_FLOW_QA.SP_ENRICH_ORDERS();',
     )
     
-#
-#    t06_notebook = SnowflakeOperator(
-#        task_id='run_snowflake_notebook',
-#        sql=(
-#            """EXECUTE NOTEBOOK PROJECT DAG_TESTING.PI_FLOW_QA.NB_ORDERS_ANALYTICS
-# MAIN_FILE = 'nb_orders_analytics.ipynb',
-# COMPUTE_POOL = 'SYSTEM_COMPUTE_POOL_CPU',
-# QUERY_WAREHOUSE = 'COMPUTE_WH',
-#RUNTIME = 'V2.2-CPU-PY3.10';"""
-#        ),
-#    )
+    t06_notebook = SnowflakeOperator(
+            task_id='run_snowflake_notebook',
+            sql=(
+                """EXECUTE NOTEBOOK PROJECT DAG_TESTING.PI_FLOW_QA.NB_ORDERS_ANALYTICS
+    MAIN_FILE = 'nb_orders_analytics.ipynb'
+    COMPUTE_POOL = 'SYSTEM_COMPUTE_POOL_CPU'
+    QUERY_WAREHOUSE = 'COMPUTE_WH'
+    RUNTIME = 'V2.2-CPU-PY3.10'"""
+            ),
+    )
 
     t07_dbt_seed = SnowflakeOperator(
         task_id='run_dbt_seed',
@@ -137,5 +136,5 @@ with DAG(
     )
 
     t01_bootstrap >> t02_prepare_objects >> t03_ingest_raw >> t04_cleanse >> t05_enrich
-    t05_enrich >> t07_dbt_seed >> t08_dbt_staging >> t09_dbt_marts
+    t05_enrich >> t06_notebook >> t07_dbt_seed >> t08_dbt_staging >> t09_dbt_marts
     t09_dbt_marts >> t10_dq_assertions >> t11_publish >> t12_metrics >> t13_notify >> t14_finalize
