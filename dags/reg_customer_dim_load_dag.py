@@ -28,7 +28,7 @@ with DAG(
     params={
         'run_ts': Param(type='string', default='2026-01-01 00:00:00', description='Run timestamp'),
     },
-    default_args={'snowflake_conn_id': 'snowflake_default', 'retries': 2, 'retry_delay_seconds': 45},
+    default_args={'snowflake_conn_id': 'chetan_conn', 'retries': 2, 'retry_delay_seconds': 45},
 ) as dag:
     t01 = PythonOperator(task_id='prechecks', python_callable=prechecks)
     t02 = SnowflakeOperator(task_id='truncate_stage', sql='SELECT 1;')
