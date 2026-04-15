@@ -105,7 +105,7 @@ RUNTIME = 'V2.2-CPU-PY3.10';"""
         task_id='run_dbt_marts',
         sql="EXECUTE DBT PROJECT DAG_TESTING.PI_FLOW_QA.PI_FLOW_DBT_DEMO ARGS = 'run --select fct_orders mart_revenue --target dev';",
     )
-
+    
     t10_dq_assertions = SnowflakeOperator(
         task_id='run_dq_assertions',
         sql='CALL DAG_TESTING.PI_FLOW_QA.SP_DQ_ASSERT_ORDERS();',
