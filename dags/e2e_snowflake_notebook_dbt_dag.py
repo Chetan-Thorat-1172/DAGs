@@ -9,7 +9,7 @@ This DAG validates an end-to-end analytics pipeline using:
 Reference DDL file:
 - dags-repo/dags/regression_suite/sql/reg_e2e_notebook_dbt_ddl.sql
 """
-#comment
+#comment1
 from datetime import datetime
 from dag_parser.dynamic.params import Param
 from dag_parser.dynamic.dag_context import DAG, PythonOperator, SnowflakeOperator
