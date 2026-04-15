@@ -79,6 +79,7 @@ with DAG(
         task_id='enrich_orders',
         sql='CALL DAG_TESTING.PI_FLOW_QA.SP_ENRICH_ORDERS();',
     )
+    
 '''
     t06_notebook = SnowflakeOperator(
         task_id='run_snowflake_notebook',
@@ -91,7 +92,6 @@ RUNTIME = 'V2.2-CPU-PY3.10';"""
         ),
     )
 '''
-
     t07_dbt_seed = SnowflakeOperator(
         task_id='run_dbt_seed',
         sql="EXECUTE DBT PROJECT DAG_TESTING.PI_FLOW_QA.PI_FLOW_DBT_DEMO ARGS = 'seed --target dev';",
