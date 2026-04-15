@@ -1,5 +1,5 @@
 """
-Regression DAG: Snowflake SP + Notebook + DBT E2E 
+Regression DAG: Snowflake SP + Notebook + DBT E2E
 
 This DAG validates an end-to-end analytics pipeline using:
 1. Multiple Snowflake stored procedures
@@ -7,7 +7,7 @@ This DAG validates an end-to-end analytics pipeline using:
 3. Direct Snowflake DBT project execution via EXECUTE DBT PROJECT
 
 Reference DDL file:
-- dags-repo/dags/regression_suite/sql/reg_e2e_notebook_dbt_ddl.sql   
+- dags-repo/dags/regression_suite/sql/reg_e2e_notebook_dbt_ddl.sql
 """
 
 from datetime import datetime
@@ -40,7 +40,7 @@ def finalize_pipeline(**context):
 
 
 with DAG(
-    dag_id='e2e_snowflake_notebook_dbt_dag',
+    dag_id='reg_e2e_snowflake_notebook_dbt_dag',
     schedule_interval=None,
     start_date=datetime(2026, 1, 1),
     catchup=False,
@@ -50,9 +50,9 @@ with DAG(
         'dbt_target': Param(type='string', default='dev', description='DBT target profile'),
     },
     default_args={
+        'snowflake_conn_id': 'snowflake_default',
         'retries': 1,
         'retry_delay_seconds': 30,
-        "snowflake_conn_id": "chetan_conn"
     },
 ) as dag:
     t01_bootstrap = PythonOperator(
@@ -62,52 +62,58 @@ with DAG(
 
     t02_prepare_objects = SnowflakeOperator(
         task_id='prepare_objects',
-        sql='CALL PI_FLOW_QA.SP_PREPARE_OBJECTS();',
+        sql='CALL DAG_TESTING.PI_FLOW_QA.SP_PREPARE_OBJECTS();',
     )
 
     t03_ingest_raw = SnowflakeOperator(
         task_id='ingest_raw_orders',
-        sql="CALL PI_FLOW_QA.SP_INGEST_RAW_ORDERS('2026-01-01');",
+        sql="CALL DAG_TESTING.PI_FLOW_QA.SP_INGEST_RAW_ORDERS('2026-01-01');",
     )
 
     t04_cleanse = SnowflakeOperator(
         task_id='cleanse_orders',
-        sql='CALL PI_FLOW_QA.SP_CLEANSE_ORDERS();',
+        sql='CALL DAG_TESTING.PI_FLOW_QA.SP_CLEANSE_ORDERS();',
     )
 
     t05_enrich = SnowflakeOperator(
         task_id='enrich_orders',
-        sql='CALL PI_FLOW_QA.SP_ENRICH_ORDERS();',
+        sql='CALL DAG_TESTING.PI_FLOW_QA.SP_ENRICH_ORDERS();',
     )
 
     t06_notebook = SnowflakeOperator(
         task_id='run_snowflake_notebook',
-        sql='EXECUTE NOTEBOOK PROJECT DAG_TESTING.PI_FLOW_QA.NB_ORDERS_ANALYTICS;',
+        sql=(
+            """EXECUTE NOTEBOOK PROJECT DAG_TESTING.PI_FLOW_QA.NB_ORDERS_ANALYTICS
+MAIN_FILE = 'nb_orders_analytics.ipynb'
+COMPUTE_POOL = 'SYSTEM_COMPUTE_POOL_CPU'
+QUERY_WAREHOUSE = 'COMPUTE_WH'
+RUNTIME = 'V2.2-CPU-PY3.10';"""
+        ),
     )
 
     t07_dbt_seed = SnowflakeOperator(
         task_id='run_dbt_seed',
-        sql="EXECUTE DBT PROJECT PI_FLOW_QA.DBT_PROJECTS.PI_FLOW_DBT_DEMO ARGS = 'seed --target dev'",
+        sql="EXECUTE DBT PROJECT DAG_TESTING.DBT_PROJECTS.PI_FLOW_DBT_DEMO ARGS='seed' TARGET='dev';",
     )
 
     t08_dbt_staging = SnowflakeOperator(
         task_id='run_dbt_staging_models',
-        sql="EXECUTE DBT PROJECT PI_FLOW_QA.DBT_PROJECTS.PI_FLOW_DBT_DEMO ARGS = 'run --select stg_orders stg_customers --target dev';",
+        sql="EXECUTE DBT PROJECT DAG_TESTING.DBT_PROJECTS.PI_FLOW_DBT_DEMO ARGS='run --select stg_orders stg_customers' TARGET='dev';",
     )
 
     t09_dbt_marts = SnowflakeOperator(
         task_id='run_dbt_marts',
-        sql="EXECUTE DBT PROJECT PI_FLOW_QA.DBT_PROJECTS.PI_FLOW_DBT_DEMO ARGS = 'run --select fct_orders mart_revenue --target dev';",
+        sql="EXECUTE DBT PROJECT DAG_TESTING.DBT_PROJECTS.PI_FLOW_DBT_DEMO ARGS='run --select fct_orders mart_revenue' TARGET='dev';",
     )
 
     t10_dq_assertions = SnowflakeOperator(
         task_id='run_dq_assertions',
-        sql='CALL PI_FLOW_QA.SP_DQ_ASSERT_ORDERS();',
+        sql='CALL DAG_TESTING.PI_FLOW_QA.SP_DQ_ASSERT_ORDERS();',
     )
 
     t11_publish = SnowflakeOperator(
         task_id='publish_serving_table',
-        sql='CALL PI_FLOW_QA.SP_PUBLISH_ORDERS_SERVING();',
+        sql='CALL DAG_TESTING.PI_FLOW_QA.SP_PUBLISH_ORDERS_SERVING();',
     )
 
     t12_metrics = PythonOperator(
