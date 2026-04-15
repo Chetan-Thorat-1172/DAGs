@@ -93,17 +93,17 @@ RUNTIME = 'V2.2-CPU-PY3.10';"""
 
     t07_dbt_seed = SnowflakeOperator(
         task_id='run_dbt_seed',
-        sql="EXECUTE DBT PROJECT DAG_TESTING.DBT_PROJECTS.PI_FLOW_DBT_DEMO ARGS='seed' TARGET='dev';",
+        sql="EXECUTE DBT PROJECT DAG_TESTING.PI_FLOW_QA.PI_FLOW_DBT_DEMO ARGS = 'seed --target dev';",
     )
 
     t08_dbt_staging = SnowflakeOperator(
         task_id='run_dbt_staging_models',
-        sql="EXECUTE DBT PROJECT DAG_TESTING.DBT_PROJECTS.PI_FLOW_DBT_DEMO ARGS='run --select stg_orders stg_customers' TARGET='dev';",
+        sql="EXECUTE DBT PROJECT DAG_TESTING.PI_FLOW_QA.PI_FLOW_DBT_DEMO ARGS = 'run --select stg_orders stg_customers --target dev';",
     )
 
     t09_dbt_marts = SnowflakeOperator(
         task_id='run_dbt_marts',
-        sql="EXECUTE DBT PROJECT DAG_TESTING.DBT_PROJECTS.PI_FLOW_DBT_DEMO ARGS='run --select fct_orders mart_revenue' TARGET='dev';",
+        sql="EXECUTE DBT PROJECT DAG_TESTING.PI_FLOW_QA.PI_FLOW_DBT_DEMO ARGS = 'run --select fct_orders mart_revenue --target dev';",
     )
 
     t10_dq_assertions = SnowflakeOperator(
