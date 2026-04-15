@@ -50,7 +50,7 @@ with DAG(
         'dbt_target': Param(type='string', default='dev', description='DBT target profile'),
     },
     default_args={
-        'snowflake_conn_id': 'harsh_conn',
+        'snowflake_conn_id': 'chetan_conn',
         'retries': 1,
         'retry_delay_seconds': 30,
     },
