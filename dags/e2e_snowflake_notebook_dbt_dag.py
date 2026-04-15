@@ -87,7 +87,7 @@ with DAG(
 MAIN_FILE = 'nb_orders_analytics.ipynb',
 COMPUTE_POOL = 'SYSTEM_COMPUTE_POOL_CPU',
 QUERY_WAREHOUSE = 'COMPUTE_WH',
-RUNTIME = 'V2.2-CPU-PY3.10'"""
+RUNTIME = 'V2.2-CPU-PY3.10';"""
         ),
     )
 
