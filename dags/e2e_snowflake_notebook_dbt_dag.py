@@ -40,7 +40,7 @@ def finalize_pipeline(**context):
 
 
 with DAG(
-    dag_id='reg_e2e_snowflake_notebook_dbt_dag',
+    dag_id='reg_e2e_snowflake_notebook_dbt_dag', 
     schedule_interval=None,
     start_date=datetime(2026, 1, 1),
     catchup=False,
