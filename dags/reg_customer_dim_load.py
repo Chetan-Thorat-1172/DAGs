@@ -4,8 +4,8 @@ from dag_parser.dynamic.params import Param
 from dag_parser.dynamic.dag_context import DAG, PythonOperator, SnowflakeOperator
 
 
-def prechecks(**context):    
-    print('Running customer prechecks')
+def prechecks(**context):     
+    print('Running customer prechecks') 
 
 
 def schema_contract_check(**context):
