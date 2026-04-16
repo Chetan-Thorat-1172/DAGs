@@ -23,7 +23,7 @@ with DAG(
     start_date=datetime(2026, 1, 1),
     catchup=False,
     params={'full_load': Param(type='boolean', default=False, description='Run full extraction')},
-    default_args={'snowflake_conn_id': 'snowflake_default', 'retries': 1, 'retry_delay_seconds': 20},
+    default_args={'snowflake_conn_id': 'harsh_conn', 'retries': 1, 'retry_delay_seconds': 20},
 ) as dag:
     t01 = PythonOperator(task_id='prepare_context', python_callable=lambda **context: 'ctx')
     t02 = BranchPythonOperator(task_id='choose_branch', python_callable=choose_path)
