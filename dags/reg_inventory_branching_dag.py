@@ -1,7 +1,7 @@
 
 from datetime import datetime
 from dag_parser.dynamic.params import Param
-from dag_parser.dynamic.dag_context import DAG, PythonOperator, BranchPythonOperator, SnowflakeOperator
+from dag_parser.dynamic.dag_context import DAG, PythonOperator, BranchPythonOperator, SnowflakeOperator 
 
 
 def choose_path(**context):
