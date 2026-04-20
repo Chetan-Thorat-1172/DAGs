@@ -34,8 +34,8 @@ def finalize_pipeline(**context):
 
 with DAG(
     dag_id="snowflake_daily_ingest",
-    schedule_interval=None,
-    start_date=datetime(2026, 2, 26),
+    schedule_interval="0 14 * * *",
+    start_date=datetime(2026, 5, 26),
     catchup=False,
 
     params={
