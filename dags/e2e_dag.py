@@ -140,7 +140,7 @@ with DAG(
     t10_run_snowflake_notebook = SnowflakeOperator(
         task_id="run_snowflake_notebook",
         sql="""
-        EXECUTE NOTEBOOK PROJECT DAG_TESTING.PI_FLOW_QA.NB_PI_FLOW_SALES_QC
+        EXECUTE NOTEBOOK PROJECT DAG_TESTING.PI_FLOW_QA.NB_SALES_QUALITY_CHECKS
         MAIN_FILE = 'nb_sales_quality_checks.ipynb'
         COMPUTE_POOL = 'SYSTEM_COMPUTE_POOL_CPU'
         QUERY_WAREHOUSE = 'COMPUTE_WH'
