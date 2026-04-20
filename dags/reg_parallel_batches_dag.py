@@ -7,7 +7,7 @@ def setup(**context):
     return 'setup_complete'
 
 
-def make_batch_task(n):
+def make_batch_task(n):  
     def _task(**context):
         print(f'Executing batch {n}')
         return {'batch': n, 'status': 'ok'}
