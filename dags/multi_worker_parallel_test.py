@@ -5,7 +5,7 @@ from datetime import datetime
 
 default_args = {
     "snowflake_conn_id": "harsh_conn"
-}
+}  
 
 with DAG(
     dag_id="test_snowflake_simple",
