@@ -8,8 +8,8 @@ default_args = {
 }  
 
 with DAG(
-    dag_id="test_snowflake_simple",
-    schedule_interval=None,
+    dag_id="multi_worker_parallel_pipeline",
+    schedule_interval="@hourly",
     start_date=datetime(2026, 3, 10),
     catchup=False,
     default_args=default_args,
