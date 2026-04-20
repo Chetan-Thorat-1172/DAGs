@@ -151,8 +151,7 @@ with DAG(
     t11_run_dbt_project = SnowflakeOperator(
         task_id="run_dbt_project",
         sql=(
-            "EXECUTE DBT PROJECT DAG_TESTING.PI_FLOW_QA.PI_FLOW_SALES_DBT "
-            "ARGS = 'run --target qa --select stg_sales_fact mart_daily_sales mart_channel_sales';"
+            "EXECUTE DBT PROJECT DAG_TESTING.PI_FLOW_QA.PI_FLOW_SALES_DBT ARGS = 'run --target dev --select stg_sales_fact mart_daily_sales mart_channel_sales';"
         ),
     )
 
