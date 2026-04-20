@@ -7,8 +7,8 @@ default_args = {
 }  
 
 with DAG(
-    dag_id="test_snowflake_hello",
-    schedule_interval=None,
+    dag_id="alerting_demo_pipeline",
+    schedule_interval="@daily",
     start_date=datetime(2026, 3, 10),
     catchup=False,
     default_args=default_args,
