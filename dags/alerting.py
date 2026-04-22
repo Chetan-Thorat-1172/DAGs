@@ -2,7 +2,7 @@ from datetime import datetime
 from dag_parser.dynamic.dag_context import DAG, PythonOperator, EmailOperator , SmtpNotifier
 
 # ─────────────────────────────────────────────────────────
-# Notifier Instancess
+# Notifier Instances
 # ─────────────────────────────────────────────────────────
 
 failure_notifier = SmtpNotifier(
