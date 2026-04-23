@@ -4,7 +4,7 @@ from dag_parser.dynamic.params import Param
 from datetime import datetime
 
 default_args = {
-    "snowflake_conn_id": "harsh_conn"
+    "snowflake_conn_id": "chetan_conn"
 }
 
 with DAG(
