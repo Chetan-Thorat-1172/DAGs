@@ -5,7 +5,6 @@ from dag_parser.dynamic.dag_context import DAG, PythonOperator, SnowflakeOperato
 def marker(name, **context):
     print(f"dag_11 {name}") 
 
-
 with DAG(
     dag_id="dag_11",
     schedule_interval="15 16 * * *",
