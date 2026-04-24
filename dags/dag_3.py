@@ -28,7 +28,7 @@ def marker(name, **context):
 
 with DAG(
     dag_id="dag_3",
-    schedule_interval="15 16 * * *",
+    schedule_interval="30 17 * * *",
     start_date=datetime(2026, 4, 24),
     catchup=False,
     default_args={
