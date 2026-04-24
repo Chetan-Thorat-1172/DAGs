@@ -3,14 +3,14 @@ from dag_parser.dynamic.dag_context import DAG, PythonOperator, SnowflakeOperato
 
 
 retry_notifier = SmtpNotifier(
-    to=["qa-alerts@pibythree.com"],
+    to=["chetan.thorat@pibythree.com"],
     subject="dag_3 retry {{ dag_id }}.{{ task_id }} try={{ try_number }}",
     html_content="<p>Retry event for dag_3</p>",
 )
 
 
 failure_notifier = SmtpNotifier(
-    to=["qa-alerts@pibythree.com"],
+    to=["chetan.thorat@pibythree.com"],
     subject="dag_3 failure {{ dag_id }}.{{ task_id }}",
     html_content="<p>Failure event for dag_3</p>",
 )
