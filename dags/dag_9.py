@@ -23,10 +23,10 @@ with DAG(
     t02 = SnowflakeOperator(task_id="shared_prepare", sql="CALL TESTING.PI_FLOW_LOAD_TEST.SP_LT_SLEEP_2S('dag_9_shared_prepare');")
     t03 = BranchPythonOperator(task_id="branch_connection", python_callable=choose_conn_path)
 
-    t04 = SnowflakeOperator(task_id="conn_a_step_1", sql="CALL TESTING.PI_FLOW_LOAD_TEST.SP_LT_SLEEP_2S('dag_9_conn_a_1');", snowflake_conn_id="chetan_conn")
-    t05 = SnowflakeOperator(task_id="conn_a_step_2", sql="CALL TESTING.PI_FLOW_LOAD_TEST.SP_LT_SLEEP_2S('dag_9_conn_a_2');", snowflake_conn_id="chetan_conn")
-    t06 = SnowflakeOperator(task_id="conn_a_step_3", sql="CALL TESTING.PI_FLOW_LOAD_TEST.SP_LT_SLEEP_3S('dag_9_conn_a_3');", snowflake_conn_id="chetan_conn")
-    t07 = SnowflakeOperator(task_id="conn_a_step_4", sql="CALL TESTING.PI_FLOW_LOAD_TEST.SP_LT_SLEEP_2S('dag_9_conn_a_4');", snowflake_conn_id="chetan_conn")
+    t04 = SnowflakeOperator(task_id="conn_a_step_1", sql="CALL TESTING.PI_FLOW_LOAD_TEST.SP_LT_SLEEP_2S('dag_9_conn_a_1');", snowflake_conn_id="harsh_conn")
+    t05 = SnowflakeOperator(task_id="conn_a_step_2", sql="CALL TESTING.PI_FLOW_LOAD_TEST.SP_LT_SLEEP_2S('dag_9_conn_a_2');", snowflake_conn_id="harsh_conn")
+    t06 = SnowflakeOperator(task_id="conn_a_step_3", sql="CALL TESTING.PI_FLOW_LOAD_TEST.SP_LT_SLEEP_3S('dag_9_conn_a_3');", snowflake_conn_id="harsh_conn")
+    t07 = SnowflakeOperator(task_id="conn_a_step_4", sql="CALL TESTING.PI_FLOW_LOAD_TEST.SP_LT_SLEEP_2S('dag_9_conn_a_4');", snowflake_conn_id="harsh_conn")
 
     t08 = SnowflakeOperator(task_id="conn_b_step_1", sql="CALL TESTING.PI_FLOW_LOAD_TEST.SP_LT_SLEEP_2S('dag_9_conn_b_1');", snowflake_conn_id="harsh_conn")
     t09 = SnowflakeOperator(task_id="conn_b_step_2", sql="CALL TESTING.PI_FLOW_LOAD_TEST.SP_LT_SLEEP_2S('dag_9_conn_b_2');", snowflake_conn_id="harsh_conn")
