@@ -9,7 +9,7 @@ def choose_path(**context):
 
 def marker(name, **context):
     print(f"dag_1 marker: {name}")
-
+ 
 
 with DAG(
     dag_id="dag_1",
