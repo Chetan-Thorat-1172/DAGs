@@ -3,7 +3,7 @@ from dag_parser.dynamic.operators import SnowflakeOperator
 from datetime import datetime
 #comment2
 default_args = {
-    "snowflake_conn_id": "harsh_conn"
+    "snowflake_conn_id": "chetan_conn"
 }  
 
 with DAG(
