@@ -4,7 +4,7 @@ pu
 This DAG:
 1. Reads the conf passed from the parent DAG
 2. Processes data based on the conf parameters  
-3. Outputs a summarydod
+3. Outputs a summarydod   
 
 It is designed to be triggered programmatically (schedule_interval=None)
 and demonstrates cross-DAG communication via dag_run.conf..
