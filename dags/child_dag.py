@@ -25,7 +25,7 @@ def read_conf(**context):
     print(f"  APPCODE:            {conf.get('APPCODE', 'N/A')}")
     print(f"  curation_database:  {conf.get('curation_database', 'N/A')}")
     print(f"  restartind:         {conf.get('restartind', 'N/A')}")
-    print(f"  Full conf: {conf}")
+    print(f"  Full conf: {conf}") 
 
     return conf
 
