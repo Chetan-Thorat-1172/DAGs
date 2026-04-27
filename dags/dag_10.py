@@ -13,8 +13,8 @@ def marker(name, **context):
 
 with DAG(
     dag_id="dag_10",
-    schedule_interval="25 16 * * *",
-    start_date=datetime(2026, 4, 24),
+    schedule_interval="35 16 * * *",
+    start_date=datetime(2026, 4, 27),
     catchup=False,
     default_args={"snowflake_conn_id": "harsh_conn", "retries": 1, "retry_delay_seconds": 5},
     description="Load test DAG 10 with 20 tasks and combined branch/trigger fanout",
