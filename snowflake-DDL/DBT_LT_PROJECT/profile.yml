@@ -1,0 +1,12 @@
+default:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: ""
+      user: ""
+      role: ACCOUNTADMIN
+      database: TESTING
+      warehouse: COMPUTE_WH
+      schema: PI_FLOW_LOAD_TEST
+      threads: 4
