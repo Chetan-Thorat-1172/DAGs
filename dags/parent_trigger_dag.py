@@ -1,5 +1,5 @@
 """
-Parent DAG — Demonstrates TriggerDagRunOperator.
+Parent DAG — Demonstrates TriggerDagRunOperator..
 
 This DAG:
 1. Runs a preparation task (extract_config)
