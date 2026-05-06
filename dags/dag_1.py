@@ -4,8 +4,8 @@ from dag_parser.dynamic.dag_context import DAG, SnowflakeOperator
 
 with DAG(
     dag_id="simple_snowflake_dag",
-    schedule_interval="0 12 * * *",  # runs daily at 12:00
-    start_date=datetime(2026, 5, 1),
+    schedule_interval="0 18 * * *",  # runs daily at 12:00
+    start_date=datetime(2026, 5, 6),
     catchup=False,
     default_args={
         "snowflake_conn_id": "harsh_conn",
