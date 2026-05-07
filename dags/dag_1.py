@@ -4,7 +4,7 @@ from dag_parser.dynamic.dag_context import DAG, SnowflakeOperator
 
 with DAG(
     dag_id="dag_1",
-    schedule_interval="0 10 * * *",  
+    schedule_interval="30 10 * * *",  
     start_date=datetime(2026, 5, 7),
     catchup=False,
     default_args={
