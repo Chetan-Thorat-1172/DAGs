@@ -45,10 +45,6 @@ CREATE OR REPLACE NOTEBOOK PROJECT TESTING.PI_FLOW_LOAD_TEST.NB_LT_PROJECT
   COMMENT = 'Lightweight sleep and audit insert notebook project';
 
 
-
-CREATE OR REPLACE DBT PROJECT PI_FLOW_LOAD_TEST.DBT_LT_PROJECT
-    FROM '@PI_FLOW_LOAD_TEST.LT_STAGE/dbt_lt_project.zip';
-
 -- Optional quick smoke validation.
 CALL PI_FLOW_LOAD_TEST.SP_LT_SLEEP_2S('smoke_call_1');
 CALL PI_FLOW_LOAD_TEST.SP_LT_SLEEP_3S('smoke_call_2');
